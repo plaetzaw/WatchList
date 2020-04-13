@@ -2,6 +2,8 @@ import {
   TESTCASE1,
   TESTCASE_ADD,
   TESTCASE_DELETE,
+  LOADING_DATA,
+  SET_HOT_MOVIES,
 } from "../actions/actionTypes";
 
 let templateReducer = (state, action) => {
@@ -21,6 +23,8 @@ let templateReducer = (state, action) => {
           age: "Roar",
         },
       ], ///array of objects
+      loading: false,
+      movies: [],
     };
   }
   switch (action.type) {
@@ -43,6 +47,17 @@ let templateReducer = (state, action) => {
       return {
         ...state,
         someArray: filteredArray,
+      };
+    case LOADING_DATA:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SET_HOT_MOVIES:
+      return {
+        ...state,
+        loading: false,
+        movies: action.payload,
       };
     default:
       return state;

@@ -2,13 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 //import redux
-import { createStore } from "redux";
+// import { createStore } from "redux";
 import { Provider } from "react-redux";
+import store from "./redux/store";
 //import router
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import BaseLayout from "./components/layout/BaseLayout";
 import Container from "./components/Container";
 import rootReducer from "./reducers/rootReducer";
+import MovieCards from "./components/Movie";
+
+// == Material UI ==
+import { ThemeProvider } from "@material-ui/core/styles";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+
+// == MAIN THEME == (super man noises)
+import themeFile from "./utility/theme";
+
+const theme = createMuiTheme(themeFile);
 
 let saveToLocalStorage = (state) => {
   try {
@@ -36,11 +47,11 @@ let loadFromLocalStorage = (params) => {
 
 const persistedState = loadFromLocalStorage();
 
-let store = createStore(
-  rootReducer,
-  persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// let store = createStore(
+//   rootReducer,
+//   persistedState,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 store.subscribe(() => {
   saveToLocalStorage(store.getState());
@@ -48,14 +59,19 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <BaseLayout>
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route exact path="/container" component={Container} />
-        </Switch>
-      </BaseLayout>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <BaseLayout>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route exact path="/container" component={Container} />
+            <Route exact path="/watchlist" component={Container} />
+            <Route exact path="/aboutus" component={Container} />
+            <Route exact path="/movielist" component={MovieCards} />
+          </Switch>
+        </BaseLayout>
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>,
   document.getElementById("root")
 );

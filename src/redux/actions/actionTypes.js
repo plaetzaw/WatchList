@@ -1,3 +1,5 @@
 export const TESTCASE1 = "TESTCASE1";
 export const TESTCASE_ADD = "TESTCASE-ADD";
 export const TESTCASE_DELETE = "TESTCASE-DELETE";
+export const LOADING_DATA = "LOADING_DATA";
+export const SET_HOT_MOVIES = "SET_HOT_MOVIES";
