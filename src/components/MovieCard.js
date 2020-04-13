@@ -13,7 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import Store from "../redux/store";
 
 // REDUX STUFF
-import { getMovies } from "../redux/actions/movieCalls";
+import {
+  getMovies,
+  getSpecificMovie,
+  filterByGenre,
+} from "../redux/actions/movieCalls";
 import { connect } from "react-redux";
 
 /* const styles = (theme) => ({
@@ -25,11 +29,16 @@ import { connect } from "react-redux";
 }) */
 
 // export default function ImgMediaCard() {
-class ImgMediaCard extends Component {
+class MovieCard extends Component {
   //ADD NEW API CALLS HERE
   componentDidMount() {
     this.props.getMovies();
+    this.props.getSpecificMovie();
+    this.props.filterByGenre();
   }
+
+  // {this.store.data.map((movies) =>
+  // )}
 
   render() {
     return (
@@ -69,9 +78,11 @@ class ImgMediaCard extends Component {
 
 // REDUX JUNK BELOW
 
-ImgMediaCard.propTypes = {
+MovieCard.propTypes = {
   //ADD PROP TYPES HERE JUST REPEAT FuncName: PropTypes.func.isRequired
   getMovies: PropTypes.func.isRequired,
+  getSpecificMovie: PropTypes.func.isRequired,
+  filterByGenre: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -82,6 +93,10 @@ const mapStateToProps = (state) => ({
 //export default ImgMediaCard;
 
 // {getMovies, nextAPICAll, nextAPICall, etc.}
-export default connect(mapStateToProps, { getMovies })(ImgMediaCard);
+export default connect(mapStateToProps, {
+  getMovies,
+  getSpecificMovie,
+  filterByGenre,
+})(MovieCard);
 
 //export default withStyles((styles)(ImgMediaCard))

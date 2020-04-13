@@ -9,8 +9,8 @@ import store from "./redux/store";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import BaseLayout from "./components/layout/BaseLayout";
 import Container from "./components/Container";
-import rootReducer from "./reducers/rootReducer";
-import MovieCards from "./components/Movie";
+// import rootReducer from "./reducers/rootReducer";
+import Movie from "./components/pages/Movie";
 
 // == Material UI ==
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -67,7 +67,8 @@ ReactDOM.render(
             <Route exact path="/container" component={Container} />
             <Route exact path="/watchlist" component={Container} />
             <Route exact path="/aboutus" component={Container} />
-            <Route exact path="/movielist" component={MovieCards} />
+            <Route exact path="/movielist" component={Movie} />
+            <Route exact path="/movielist/:{movieid}" component={Movie} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>

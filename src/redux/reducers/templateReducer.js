@@ -4,6 +4,8 @@ import {
   TESTCASE_DELETE,
   LOADING_DATA,
   SET_HOT_MOVIES,
+  GO_TO_MOVIE,
+  FILTER_BY_GENRE,
 } from "../actions/actionTypes";
 
 let templateReducer = (state, action) => {
@@ -25,6 +27,7 @@ let templateReducer = (state, action) => {
       ], ///array of objects
       loading: false,
       movies: [],
+      genrelist: [],
     };
   }
   switch (action.type) {
@@ -58,6 +61,18 @@ let templateReducer = (state, action) => {
         ...state,
         loading: false,
         movies: action.payload,
+      };
+    case GO_TO_MOVIE:
+      return {
+        ...state,
+        loading: false,
+        movies: action.payload,
+      };
+    case FILTER_BY_GENRE:
+      return {
+        ...state,
+        loading: false,
+        genrelist: action.payload,
       };
     default:
       return state;
