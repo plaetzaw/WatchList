@@ -1,10 +1,56 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+// MATERIAL UI
+import Grid from "@material-ui/core/Grid";
+
+// Components
 import MovieCard from "../MovieCard";
 
+// REDUX
+import {
+  getMovies,
+  getSpecificMovie,
+  filterByGenre,
+} from "../../redux/actions/movieCalls";
+import { connect } from "react-redux";
+
 class Movie extends Component {
+  //ADD NEW API CALLS HERE
+  componentDidMount() {
+    this.props.getMovies();
+    //this.props.getSpecificMovie();
+    //this.props.filterByGenre();
+  }
+
+  // {this.store.data.map((movies) =>
+  // )}
   render() {
-    return <p>AAAAAAAAAAAAAAAAAAAAAAAAAh</p>;
+    const { movies, loading } = this.props.data;
+
+    let movieMarkup = !loading ? (
+      movies.map((data) => <MovieCard movies={data} />)
+    ) : (
+      <p>Loading...</p>
+    );
+
+    console.log("MOVIE PAGE");
+    console.log(this);
+
+    return <>{movieMarkup}</>;
   }
 }
 
-export default Movie;
+Movie.propTypes = {
+  //ADD PROP TYPES HERE JUST REPEAT FuncName: PropTypes.func.isRequired
+  getMovies: PropTypes.func.isRequired,
+  //getSpecificMovie: PropTypes.func.isRequired,
+  //filterByGenre: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
+
+export default connect(mapStateToProps, { getMovies })(Movie);

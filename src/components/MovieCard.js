@@ -10,14 +10,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Store from "../redux/store";
 
 // REDUX STUFF
-import {
-  getMovies,
-  getSpecificMovie,
-  filterByGenre,
-} from "../redux/actions/movieCalls";
 import { connect } from "react-redux";
 
 /* const styles = (theme) => ({
@@ -30,17 +24,8 @@ import { connect } from "react-redux";
 
 // export default function ImgMediaCard() {
 class MovieCard extends Component {
-  //ADD NEW API CALLS HERE
-  componentDidMount() {
-    this.props.getMovies();
-    this.props.getSpecificMovie();
-    this.props.filterByGenre();
-  }
-
-  // {this.store.data.map((movies) =>
-  // )}
-
   render() {
+    console.log(this);
     return (
       // {<Card className={classes.newThing}>}
 
@@ -56,6 +41,7 @@ class MovieCard extends Component {
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               Lizard
+              {this.props.movies.original_title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Lizards are a widespread group of squamate reptiles, with over
@@ -79,10 +65,6 @@ class MovieCard extends Component {
 // REDUX JUNK BELOW
 
 MovieCard.propTypes = {
-  //ADD PROP TYPES HERE JUST REPEAT FuncName: PropTypes.func.isRequired
-  getMovies: PropTypes.func.isRequired,
-  getSpecificMovie: PropTypes.func.isRequired,
-  filterByGenre: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -93,10 +75,6 @@ const mapStateToProps = (state) => ({
 //export default ImgMediaCard;
 
 // {getMovies, nextAPICAll, nextAPICall, etc.}
-export default connect(mapStateToProps, {
-  getMovies,
-  getSpecificMovie,
-  filterByGenre,
-})(MovieCard);
+export default connect(mapStateToProps)(MovieCard);
 
 //export default withStyles((styles)(ImgMediaCard))
