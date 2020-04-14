@@ -10,7 +10,11 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import BaseLayout from "./components/layout/BaseLayout";
 import Container from "./components/Container";
 // import rootReducer from "./reducers/rootReducer";
+
+// ==Pages==
 import Movie from "./components/pages/Movie";
+import Popular from "./components/pages/Popular";
+import Upcoming from "./components/pages/Upcoming";
 
 // == Material UI ==
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -66,7 +70,9 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route exact path="/watchlist" component={Container} />
             <Route exact path="/aboutus" component={Container} />
-            <Route exact path="/movielist" component={Movie} />
+            <Route exact path="/nowplaying" component={Movie} />
+            <Route exact path="/popular" component={Popular} />
+            <Route exact path="/upcoming" component={Upcoming} />
             <Route exact path="/movielist/:{movieid}" component={Movie} />
           </Switch>
         </BaseLayout>

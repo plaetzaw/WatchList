@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   LOADING_DATA,
   SET_HOT_MOVIES,
+  SET_POPULAR_MOVIES,
+  SET_UPCOMING_MOVIES,
   GO_TO_MOVIE,
   FILTER_BY_GENRE,
 } from "./actionTypes";
@@ -28,7 +30,7 @@ export const getPopularMovies = () => (dispatch) => {
       "https://api.themoviedb.org/3/movie/popular?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US&page=1"
     )
     .then((movies) => {
-      dispatch({ type: "", payload: movies.data.results });
+      dispatch({ type: SET_POPULAR_MOVIES, payload: movies.data.results });
       console.log(movies.data.results);
     });
 };
@@ -38,10 +40,10 @@ export const getUpcomingMovies = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US&page=2"
     )
     .then((movies) => {
-      dispatch({ type: "", payload: movies.data.results });
+      dispatch({ type: SET_UPCOMING_MOVIES, payload: movies.data.results });
       console.log(movies.data.results);
     });
 };

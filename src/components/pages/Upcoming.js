@@ -8,13 +8,13 @@ import Grid from "@material-ui/core/Grid";
 import MovieCard from "../MovieCard";
 
 // REDUX
-import { getMovies } from "../../redux/actions/movieCalls";
+import { getUpcomingMovies } from "../../redux/actions/movieCalls";
 import { connect } from "react-redux";
 
-class Movie extends Component {
+class Upcoming extends Component {
   //ADD NEW API CALLS HERE
   componentDidMount() {
-    this.props.getMovies();
+    this.props.getUpcomingMovies();
     //this.props.getSpecificMovie();
     //this.props.filterByGenre();
   }
@@ -28,18 +28,16 @@ class Movie extends Component {
       <p>Loading...</p>
     );
 
-    console.log("NOW PLAYING PAGE");
+    console.log("UPCOMING PAGE");
     console.log(this);
 
     return <>{movieMarkup}</>;
   }
 }
 
-Movie.propTypes = {
+Upcoming.propTypes = {
   //ADD PROP TYPES HERE JUST REPEAT FuncName: PropTypes.func.isRequired
-  getMovies: PropTypes.func.isRequired,
-  //getSpecificMovie: PropTypes.func.isRequired,
-  //filterByGenre: PropTypes.func.isRequired,
+  getUpcomingMovies: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -47,4 +45,4 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getMovies })(Movie);
+export default connect(mapStateToProps, { getUpcomingMovies })(Upcoming);

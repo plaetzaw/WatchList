@@ -28,6 +28,7 @@ let templateReducer = (state, action) => {
         },
       ], ///array of objects
       loading: false,
+      watchlist: false,
       movies: [],
       genrelist: [],
     };
