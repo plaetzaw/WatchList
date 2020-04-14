@@ -6,6 +6,8 @@ import {
   SET_HOT_MOVIES,
   SET_POPULAR_MOVIES,
   SET_UPCOMING_MOVIES,
+  ADD_TO_WATCHLIST,
+  REMOVE_FROM_WATCHLIST,
   GO_TO_MOVIE,
   FILTER_BY_GENRE,
 } from "../actions/actionTypes";
@@ -28,8 +30,8 @@ let templateReducer = (state, action) => {
         },
       ], ///array of objects
       loading: false,
-      watchlist: false,
       movies: [],
+      watchlist: [],
       genrelist: [],
     };
   }
@@ -76,6 +78,19 @@ let templateReducer = (state, action) => {
         ...state,
         loading: false,
         movies: action.payload,
+      };
+    case ADD_TO_WATCHLIST:
+      return {
+        ...state,
+        watchList: state.watchList.concat(action.data),
+      };
+    case REMOVE_FROM_WATCHLIST:
+      let newArray = state.watchList.filter((item) => {
+        return item.id != action.id;
+      });
+      return {
+        ...state,
+        watchList: newArray,
       };
     case GO_TO_MOVIE:
       return {

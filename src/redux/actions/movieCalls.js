@@ -53,7 +53,7 @@ export const getSpecificMovie = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/{movie_id}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US"
+      `https://api.themoviedb.org/3/movie/${this.props.movies.title}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
     )
     .then((thisMovie) => {
       dispatch({ type: GO_TO_MOVIE, payload: thisMovie.data });

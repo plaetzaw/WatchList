@@ -15,6 +15,7 @@ import Container from "./components/Container";
 import Movie from "./components/pages/Movie";
 import Popular from "./components/pages/Popular";
 import Upcoming from "./components/pages/Upcoming";
+import MovieDetail from "./components/pages/MovieDetail";
 
 // == Material UI ==
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -73,7 +74,7 @@ ReactDOM.render(
             <Route exact path="/nowplaying" component={Movie} />
             <Route exact path="/popular" component={Popular} />
             <Route exact path="/upcoming" component={Upcoming} />
-            <Route exact path="/movielist/:{movieid}" component={Movie} />
+            <Route exact path="/:{movieid}" component={MovieDetail} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>

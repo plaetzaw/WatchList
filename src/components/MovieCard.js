@@ -23,45 +23,47 @@ import { connect } from "react-redux";
   }
 }) */
 
+// addToMovieList = (params) => {};
+
+// removeFromMovieList = (paramas) => {};
+
 // export default function ImgMediaCard() {
 class MovieCard extends Component {
   render() {
     console.log(this);
     return (
       // {<Card className={classes.newThing}>}
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Card
-        // id={}
-        >
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="{this.props.movies.title}"
-              height="500"
-              src={`https://image.tmdb.org/t/p/original/${this.props.movies.backdrop_path}`}
-              title="{this.props.movies.title}"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {this.props.movies.title}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {this.props.movies.overview}
-                <br />
-                Release Date: {this.props.movies.release_date}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Add to WatchList
-            </Button>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
-      </Grid>
+      <Card
+      // id={}
+      >
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="{this.props.movies.title}"
+            height="500"
+            src={`https://image.tmdb.org/t/p/original/${this.props.movies.backdrop_path}`}
+            title="{this.props.movies.title}"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {this.props.movies.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {this.props.movies.overview}
+              <br />
+              Release Date: {this.props.movies.release_date}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button onClick={this.addFavorite} size="small" color="primary">
+            Add to WatchList
+          </Button>
+          <Button size="small" color="primary">
+            View Full Information
+          </Button>
+        </CardActions>
+      </Card>
     );
   }
 }
