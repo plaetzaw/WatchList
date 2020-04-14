@@ -39,7 +39,7 @@ export default function ButtonAppBar() {
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <Button color="inherit">
               {" "}
-              <Link to="/">Home</Link>
+              <Link to="/movielist">Movie List</Link>
             </Button>
             <Button color="inherit">
               {" "}

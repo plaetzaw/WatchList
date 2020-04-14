@@ -10,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 // REDUX STUFF
 import { connect } from "react-redux";
@@ -28,36 +29,39 @@ class MovieCard extends Component {
     console.log(this);
     return (
       // {<Card className={classes.newThing}>}
-
-      <Card>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Lizard
-              {this.props.movies.original_title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
-        </CardActions>
-      </Card>
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Card
+        // id={}
+        >
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              alt="{this.props.movies.title}"
+              height="500"
+              src={`https://image.tmdb.org/t/p/original/${this.props.movies.backdrop_path}`}
+              title="{this.props.movies.title}"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {this.props.movies.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {this.props.movies.overview}
+                <br />
+                Release Date: {this.props.movies.release_date}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              Add to WatchList
+            </Button>
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
     );
   }
 }

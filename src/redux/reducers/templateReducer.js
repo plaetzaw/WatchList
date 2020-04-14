@@ -4,6 +4,8 @@ import {
   TESTCASE_DELETE,
   LOADING_DATA,
   SET_HOT_MOVIES,
+  SET_POPULAR_MOVIES,
+  SET_UPCOMING_MOVIES,
   GO_TO_MOVIE,
   FILTER_BY_GENRE,
 } from "../actions/actionTypes";
@@ -57,6 +59,18 @@ let templateReducer = (state, action) => {
         loading: true,
       };
     case SET_HOT_MOVIES:
+      return {
+        ...state,
+        loading: false,
+        movies: action.payload,
+      };
+    case SET_POPULAR_MOVIES:
+      return {
+        ...state,
+        loading: false,
+        movies: action.payload,
+      };
+    case SET_UPCOMING_MOVIES:
       return {
         ...state,
         loading: false,
