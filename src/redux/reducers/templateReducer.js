@@ -10,6 +10,7 @@ import {
   REMOVE_FROM_WATCHLIST,
   GO_TO_MOVIE,
   FILTER_BY_GENRE,
+  SET_SINGLE_MOVIE,
 } from "../actions/actionTypes";
 
 let templateReducer = (state, action) => {
@@ -33,6 +34,7 @@ let templateReducer = (state, action) => {
       movies: [],
       watchlist: [],
       genrelist: [],
+      singleMovie: "",
     };
   }
   switch (action.type) {
@@ -50,7 +52,7 @@ let templateReducer = (state, action) => {
     case TESTCASE_DELETE:
       //deleting from array
       let filteredArray = state.someArray.filter((item) => {
-        return item.id != action.id;
+        return item.id !== action.id;
       });
       return {
         ...state,
@@ -86,7 +88,7 @@ let templateReducer = (state, action) => {
       };
     case REMOVE_FROM_WATCHLIST:
       let newArray = state.watchList.filter((item) => {
-        return item.id != action.id;
+        return item.id !== action.id;
       });
       return {
         ...state,
@@ -104,6 +106,13 @@ let templateReducer = (state, action) => {
         loading: false,
         genrelist: action.payload,
       };
+    case SET_SINGLE_MOVIE:
+      return {
+        ...state,
+        singleMovie: action.payload,
+      };
+
+    // console.log(singleMovie); -Single movie not defined-
     default:
       return state;
   }

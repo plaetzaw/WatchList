@@ -2,21 +2,21 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 // MATERIAL UI
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 
 // Components
 import MovieCard from "../MovieCard";
+import { GO_TO_MOVIE } from "../../redux/actions/actionTypes";
+// import { findSingleMovie } from "../../redux/actions/actionTypes";
 
 // REDUX
-import { getSpecificMovie } from "../../redux/actions/movieCalls";
 import { connect } from "react-redux";
 
 class MovieDetail extends Component {
   //ADD NEW API CALLS HERE
-  componentDidMount() {
-    this.props.getSpecificMovie();
-    //this.props.filterByGenre();
-  }
+  /*componentDidMount() {
+    this.props.getSingleMovie(this.props.movies.id); // still need to import `getSingleMovie` from redux actions, setup PropTypes for this function
+  }*/
 
   render() {
     const { movies, loading } = this.props.data;
@@ -36,7 +36,8 @@ class MovieDetail extends Component {
 
 MovieDetail.propTypes = {
   //ADD PROP TYPES HERE JUST REPEAT FuncName: PropTypes.func.isRequired
-  getSpecificMovie: PropTypes.func.isRequired,
+  // getSpecificMovie: PropTypes.func.isRequired,
+  //getSingleMovie: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -44,4 +45,10 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getSpecificMovie })(MovieDetail);
+const mapDispatchToProps = (dispatch) => {
+  dispatch({
+    type: GO_TO_MOVIE,
+  });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetail);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 // MATERIAL UI
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 
 // Components
 import MovieCard from "../MovieCard";

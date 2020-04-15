@@ -32,16 +32,29 @@ import { connect } from "react-redux";
 
 // export default function ImgMediaCard() {
 class MovieCard extends Component {
-  handleOneMovie = () => {
-    console.log("View Full Info Button has been clicked");
-    this.props.getSingleMovie(this.props.movies.id);
+  //componentDidMount() {
+  //  this.props.findSingleMovie()
+  //}
+
+  handleClick = (e) => {
+    // figure out how to
+  };
+
+  viewMovie = (e) => {
+    e.preventDefault();
+    // window.location
+    //   .assign`https://api.themoviedb.org/3/movie/${this.props.movies.id}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`;
   };
 
   render() {
     console.log("Start Render");
-
+    console.log(this.props.movies.id);
+    console.log(this);
     return (
-      <Card>
+      // {<Card className={classes.newThing}>}
+      <Card
+      // id={}
+      >
         <CardActionArea>
           <CardMedia
             component="img"
@@ -71,7 +84,7 @@ class MovieCard extends Component {
             name={this.props.movies.id}
             size="small"
             color="primary"
-            onClick={this.handleOneMovie}
+            onClick={this.props.getSingleMovie(this.props.movies.id)}
           >
             {/* <Button onClick={this.viewMovie} size="small" color="primary"> */}
             View Full Information
