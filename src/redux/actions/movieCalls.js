@@ -79,7 +79,7 @@ export const filterByGenre = () => (dispatch) => {
 export const getSingleMovie = (movieId) => (dispatch) => {
   // dispatch loading stuff
 
-  console.log("LOOKING FOR SINGLE MOVIE...");
+  console.log("LOOKING FOR SINGLE MOVIE CREDITS...");
 
   axios
     .get(
@@ -89,14 +89,59 @@ export const getSingleMovie = (movieId) => (dispatch) => {
     //   `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
     // )
     .then((res) => {
-      console.log("FOUND THE MOVIE...UPDATING STATE...");
+      console.log("FOUND THE MOVIE CREDITS...UPDATING STATE...");
 
       dispatch({
         type: SET_SINGLE_MOVIE,
         payload: res.data,
       });
       return;
-      // console.log(singleMovie);   -singleMovie was not defined-
+    })
+    .catch((err) => console.error(err));
+};
+
+export const getSingleMovieDetail = (movieId) => (dispatch) => {
+  // dispatch loading stuff
+
+  console.log("LOOKING FOR SINGLE MOVIE DETAILS...");
+
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+    )
+    .then((res) => {
+      console.log("FOUND THE MOVIE DETAILS...UPDATING STATE...");
+
+      axios.get().then((data) => {
+        dispatch({});
+      });
+
+      dispatch({
+        type: SET_SINGLE_MOVIE,
+        payload: res.data,
+      });
+      return;
+    })
+    .catch((err) => console.error(err));
+};
+
+export const getSimilarMovies = (movieId) => (dispatch) => {
+  // dispatch loading stuff
+
+  console.log("LOOKING FOR THE SIMILAR MOVIE DETAILS...");
+
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+    )
+    .then((res) => {
+      console.log("FOUND THE SIMILAR MOVIES...UPDATING STATE...");
+
+      dispatch({
+        type: SET_SINGLE_MOVIE,
+        payload: res.data,
+      });
+      return;
     })
     .catch((err) => console.error(err));
 };

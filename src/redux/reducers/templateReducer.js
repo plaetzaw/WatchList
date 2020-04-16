@@ -17,21 +17,9 @@ let templateReducer = (state, action) => {
   ///initialize state
   if (state === undefined) {
     state = {
-      count: 0,
-      someArray: [
-        {
-          id: 1,
-          name: "Zard",
-          age: "Phoenix",
-        },
-        {
-          id: 2,
-          name: "Nargul",
-          age: "Roar",
-        },
-      ], ///array of objects
       loading: false,
       movies: [],
+      specificMovie: [],
       watchlist: [],
       genrelist: [],
       singleMovie: "",
@@ -112,7 +100,6 @@ let templateReducer = (state, action) => {
         singleMovie: action.payload,
       };
 
-    // console.log(singleMovie); -Single movie not defined-
     default:
       return state;
   }

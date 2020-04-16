@@ -14,6 +14,8 @@ import Typography from "@material-ui/core/Typography";
 // import Grid from "@material-ui/core/Grid";
 
 import { getSingleMovie } from "../redux/actions/movieCalls";
+import { getSingleMovieDetail } from "../redux/actions/movieCalls";
+import { getSimilarMovies } from "../redux/actions/movieCalls";
 
 // REDUX STUFF
 import { connect } from "react-redux";
@@ -30,6 +32,8 @@ class MovieCard extends Component {
   handleOneMovie = () => {
     console.log("View Full Info Button has been clicked");
     this.props.getSingleMovie(this.props.movies.id);
+    this.props.getSingleMovieDetail(this.props.movies.id);
+    this.props.getSimilarMovies(this.props.movies.id);
   };
 
   addToWatchList = () => {
@@ -63,6 +67,8 @@ class MovieCard extends Component {
               {this.props.movies.overview}
               <br />
               Release Date: {this.props.movies.release_date}
+              <br />
+              Genres: {this.props.movies.genre_ids}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -79,7 +85,6 @@ class MovieCard extends Component {
             onClick={this.handleOneMovie}
           >
             {/* <MovieFullDetailCard /> */}
-            {/* <Button onClick={this.viewMovie} size="small" color="primary"> */}
             View Full Information
           </Button>
           {/* VIEW FULL INFORMATION BUTTON WILL FIRE FUNCTION
@@ -105,6 +110,10 @@ const mapStateToProps = (state) => ({
 //export default ImgMediaCard;
 
 // {getMovies, nextAPICAll, nextAPICall, etc.}
-export default connect(mapStateToProps, { getSingleMovie })(MovieCard);
+export default connect(mapStateToProps, {
+  getSingleMovie,
+  getSingleMovieDetail,
+  getSimilarMovies,
+})(MovieCard);
 
 //export default withStyles((styles)(ImgMediaCard))
