@@ -83,8 +83,11 @@ export const getSingleMovie = (movieId) => (dispatch) => {
 
   axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
     )
+    // .get(
+    //   `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+    // )
     .then((res) => {
       console.log("FOUND THE MOVIE...UPDATING STATE...");
 

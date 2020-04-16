@@ -11,50 +11,19 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-// import Grid from "@material-ui/core/Grid";
 
-import { getSingleMovie } from "../redux/actions/movieCalls";
+// import { getSingleMovie } from "../redux/actions/movieCalls";
 
 // REDUX STUFF
 import { connect } from "react-redux";
 
-/* const styles = (theme) => ({
-  ...theme.spreadThis,
-  newThing: {
-    color: "purple",
-    fontSize: "1000px"
-  }
-}) */
-
-// addToMovieList = (params) => {};
-
-// removeFromMovieList = (paramas) => {};
-
-// export default function ImgMediaCard() {
-class MovieCard extends Component {
-  //componentDidMount() {
-  //  this.props.findSingleMovie()
-  //}
-
-  handleClick = (e) => {
-    // figure out how to
-  };
-
-  viewMovie = (e) => {
-    e.preventDefault();
-    // window.location
-    //   .assign`https://api.themoviedb.org/3/movie/${this.props.movies.id}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`;
-  };
-
+class MovieFullDetail extends Component {
   render() {
-    console.log("Start Render");
+    console.log("Rendering Full Page Movie");
     console.log(this.props.movies.id);
     console.log(this);
     return (
-      // {<Card className={classes.newThing}>}
-      <Card
-      // id={}
-      >
+      <Card>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -68,31 +37,14 @@ class MovieCard extends Component {
               {this.props.movies.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {this.props.movies.overview}
               <br />
               Release Date: {this.props.movies.release_date}
+              <br />
+              Cast: {this.props.singleMovie.id}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button onClick={this.addFavorite} size="small" color="primary">
-            Add to WatchList
-          </Button>
-          <Button
-            component={Link}
-            to={`${this.props.movies.title}`}
-            name={this.props.movies.id}
-            size="small"
-            color="primary"
-            onClick={this.props.getSingleMovie(this.props.movies.id)}
-          >
-            {/* <Button onClick={this.viewMovie} size="small" color="primary"> */}
-            View Full Information
-          </Button>
-          {/* VIEW FULL INFORMATION BUTTON WILL FIRE FUNCTION
-         THAT DISPATCHES ACTION TO 
-         UPDATE THE SINGLE MOVIE STATE */}
-        </CardActions>
+        <CardActions></CardActions>
       </Card>
     );
   }
@@ -100,7 +52,7 @@ class MovieCard extends Component {
 
 // REDUX JUNK BELOW
 
-MovieCard.propTypes = {
+MovieFullDetail.propTypes = {
   data: PropTypes.object.isRequired,
   getSingleMovie: PropTypes.object.isRequired,
 };
@@ -109,9 +61,4 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-//export default ImgMediaCard;
-
-// {getMovies, nextAPICAll, nextAPICall, etc.}
-export default connect(mapStateToProps, { getSingleMovie })(MovieCard);
-
-//export default withStyles((styles)(ImgMediaCard))
+export default connect(mapStateToProps)(MovieFullDetail);

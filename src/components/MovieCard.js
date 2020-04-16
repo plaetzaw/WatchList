@@ -26,15 +26,20 @@ import { connect } from "react-redux";
   }
 }) */
 
-// addToMovieList = (params) => {};
-
-// removeFromMovieList = (paramas) => {};
-
-// export default function ImgMediaCard() {
 class MovieCard extends Component {
   handleOneMovie = () => {
     console.log("View Full Info Button has been clicked");
     this.props.getSingleMovie(this.props.movies.id);
+  };
+
+  addToWatchList = () => {
+    console.log("This movie has been added to the Watchlist");
+    this.props.ADD_TO_WATCHLIST(this.props.movies.id);
+  };
+
+  removeFromWatchList = (id) => {
+    console.log("This movie has been removed from the Watchlist");
+    this.props.REMOVE_FROM_WATCHLIST(this.props.movies.id);
   };
 
   render() {
@@ -62,17 +67,18 @@ class MovieCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button onClick={this.addFavorite} size="small" color="primary">
+          <Button onClick={this.addToWatchlist} size="small" color="primary">
             Add to WatchList
           </Button>
           <Button
             component={Link}
-            to={`${this.props.movies.title}`}
+            to={`${this.props.movies.id}`}
             name={this.props.movies.id}
             size="small"
             color="primary"
             onClick={this.handleOneMovie}
           >
+            {/* <MovieFullDetailCard /> */}
             {/* <Button onClick={this.viewMovie} size="small" color="primary"> */}
             View Full Information
           </Button>
