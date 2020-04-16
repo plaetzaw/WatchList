@@ -11,6 +11,8 @@ import {
   GO_TO_MOVIE,
   FILTER_BY_GENRE,
   SET_SINGLE_MOVIE,
+  BUILD_SIMILAR_MOVIES,
+  BUILD_MOVIE_CREDITS,
 } from "../actions/actionTypes";
 
 let templateReducer = (state, action) => {
@@ -19,7 +21,13 @@ let templateReducer = (state, action) => {
     state = {
       loading: false,
       movies: [],
-      specificMovie: [],
+      specificMovie: {
+        fullDetails: {
+          credits: {},
+          details: {},
+          similar: {},
+        },
+      },
       watchlist: [],
       genrelist: [],
       singleMovie: "",
@@ -98,8 +106,27 @@ let templateReducer = (state, action) => {
       return {
         ...state,
         singleMovie: action.payload,
+        specificMovie: {
+          ...state,
+          details: action.payload,
+        },
       };
-
+    case BUILD_SIMILAR_MOVIES:
+      return {
+        ...state,
+        specificMovie: {
+          ...state,
+          similar: action.payload,
+        },
+      };
+    case BUILD_MOVIE_CREDITS:
+      return {
+        ...state,
+        specificMovie: {
+          ...state,
+          credits: action.payload,
+        },
+      };
     default:
       return state;
   }
