@@ -18,28 +18,28 @@ import { connect } from "react-redux";
 
 class MovieFullDetail extends Component {
   render() {
-    console.log("Rendering Full Page Movie");
-    console.log(this.props.movies.id);
+    console.log("==========SINGLE MOVIE STUFF===========");
+    console.log(this.props.data);
     return (
       <Card>
         <CardActionArea>
           <CardMedia
             component="img"
-            alt="{this.props.movies.title}"
+            alt="{this.props.data.specificMovie.details.title}"
             height="500"
-            src={`https://image.tmdb.org/t/p/original/${this.props.movies.backdrop_path}`}
-            title="{this.props.movies.title}"
+            src={`https://image.tmdb.org/t/p/original/${this.props.data.specificMovie.details.backdrop_path}`}
+            title="{this.props.data.specificMovie.details.title}"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {this.props.movies.title}
+              {this.props.data.specificMovie.details.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               <br />
-              Release Date: {this.props.movies.release_date}
+              Release Date: {this.props.data.specificMovie.details.release_date}
               <br />
               <br />
-              {/* Cast: {this.props.credits} */}
+              Cast: {this.props.data.specificMovie.credits.id}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -53,7 +53,7 @@ class MovieFullDetail extends Component {
 
 MovieFullDetail.propTypes = {
   data: PropTypes.object.isRequired,
-  getSingleMovie: PropTypes.object.isRequired,
+  getSingleMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

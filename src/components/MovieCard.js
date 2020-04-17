@@ -79,7 +79,8 @@ class MovieCard extends Component {
           </Button>
           <Button
             component={Link}
-            to={`${this.props.movies.id}`}
+            // {to={`${this.props.movies.id}`}}
+            to="/movieinfo"
             name={this.props.movies.id}
             size="small"
             color="primary"

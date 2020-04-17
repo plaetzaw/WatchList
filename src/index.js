@@ -74,7 +74,7 @@ ReactDOM.render(
             <Route exact path="/nowplaying" component={Movie} />
             <Route exact path="/popular" component={Popular} />
             <Route exact path="/upcoming" component={Upcoming} />
-            <Route exact path="/:{movieid}" component={MovieFullDetail} />
+            <Route exact path="/movieinfo" component={MovieFullDetail} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>
