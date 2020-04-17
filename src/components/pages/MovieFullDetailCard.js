@@ -20,6 +20,15 @@ class MovieFullDetail extends Component {
   render() {
     console.log("==========SINGLE MOVIE STUFF===========");
     console.log(this.props.data);
+    let cast = this.props.data.specificMovie.credits.cast;
+    console.log("cast", this.props.data.specificMovie.credits.cast);
+    console.log(cast);
+    //Mapping why don't you work!
+    try {
+      cast.map((data) => <MovieFullDetail movies={data} />);
+    } catch {
+      console.log("not data for cast found");
+    }
     return (
       <Card>
         <CardActionArea>
@@ -33,13 +42,21 @@ class MovieFullDetail extends Component {
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.data.specificMovie.details.title}
+              <br />
+              <br />"{this.props.data.specificMovie.details.tagline}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+
+            <Typography variant="body1" color="textSecondary" component="p">
+              <br />
+              {this.props.data.specificMovie.details.overview}
               <br />
               Release Date: {this.props.data.specificMovie.details.release_date}
               <br />
+              Budget: ${this.props.data.specificMovie.details.budget}USD
               <br />
-              Cast: {this.props.data.specificMovie.credits.id}
+              Cast: {this.props.data.specificMovie.credits.id} ID
+              <br />
+              Runtime: {this.props.data.specificMovie.details.runtime} minutes
             </Typography>
           </CardContent>
         </CardActionArea>

@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 
 class Upcoming extends Component {
   //ADD NEW API CALLS HERE
-  componentDidMount() {
+  componentWillMount() {
     this.props.getUpcomingMovies();
     //this.props.getSpecificMovie();
     //this.props.filterByGenre();

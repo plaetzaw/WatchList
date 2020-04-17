@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 
 class Popular extends Component {
   //ADD NEW API CALLS HERE
-  componentDidMount() {
+  componentWillMount() {
     this.props.getPopularMovies();
     //this.props.getSpecificMovie();
     //this.props.filterByGenre();
