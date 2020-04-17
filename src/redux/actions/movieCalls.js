@@ -9,6 +9,7 @@ import {
   SET_SINGLE_MOVIE,
   BUILD_MOVIE_CREDITS,
   BUILD_SIMILAR_MOVIES,
+  BUILD_MOVIE_DETAILS,
 } from "./actionTypes";
 
 //Now Playing
@@ -78,13 +79,7 @@ export const filterByGenre = () => (dispatch) => {
     });
 };
 
-export const getSingleMovie = (movieId) => (dispatch) => {
-  // dispatch loading stuff
-};
-
 export const getSingleMovieDetail = (movieId) => (dispatch) => {
-  // let allMovieDetails
-
   console.log("LOOKING FOR SINGLE MOVIE DETAILS...");
 
   axios
@@ -93,9 +88,14 @@ export const getSingleMovieDetail = (movieId) => (dispatch) => {
     )
     .then((res) => {
       console.log("FOUND THE MOVIE DETAILS...UPDATING STATE...");
+      console.log(res);
 
       dispatch({
         type: SET_SINGLE_MOVIE,
+        payload: res.data,
+      });
+      dispatch({
+        type: BUILD_MOVIE_DETAILS,
         payload: res.data,
       });
 
@@ -107,15 +107,32 @@ export const getSingleMovieDetail = (movieId) => (dispatch) => {
         )
         .then((res) => {
           console.log("FOUND THE SIMILAR MOVIES...UPDATING STATE...");
+          res.data = JSON.parse(JSON.stringify(res.data));
+          let similar = [];
+          console.log(res.data.results);
+
+          let missing = "No Movies Found";
+
+          if (!res.data.results) {
+            console.log("NOTHING FOUND :'(");
+            dispatch({
+              type: BUILD_SIMILAR_MOVIES,
+              payload: missing,
+            });
+          } else if (res.data.results) {
+            console.log("Found Similar Movie ");
+            let info = res.data.results;
+            info.forEach((item) => {
+              similar.push(item);
+            });
+          }
+          // [...res].forEach((item) => {
 
           dispatch({
             type: BUILD_SIMILAR_MOVIES,
-            payload: res.data.results,
+            payload: similar,
           });
 
-          // res.data.forEach(item => {
-          //   (res.data.)item.title
-          // })
           console.log(res);
           console.log(res.data);
           console.log("LOOKING FOR SINGLE MOVIE CREDITS...");
@@ -140,9 +157,3 @@ export const getSingleMovieDetail = (movieId) => (dispatch) => {
     })
     .catch((err) => console.error(err));
 };
-
-export const getSimilarMovies = (movieId) => (dispatch) => {
-  // dispatch loading stuff
-};
-
-//
