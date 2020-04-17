@@ -14,6 +14,8 @@ import Typography from "@material-ui/core/Typography";
 // import Grid from "@material-ui/core/Grid";
 
 import { getSingleMovieDetail } from "../redux/actions/movieCalls";
+import { addToWatchList } from "../redux/actions/movieCalls";
+import { removeFromWatchList } from "../redux/actions/movieCalls";
 
 // REDUX STUFF
 import { connect } from "react-redux";
@@ -32,14 +34,14 @@ class MovieCard extends Component {
     this.props.getSingleMovieDetail(this.props.movies.id);
   };
 
-  addToWatchList = () => {
+  watchListAdd = () => {
     console.log("This movie has been added to the Watchlist");
-    this.props.ADD_TO_WATCHLIST(this.props.movies.id);
+    this.props.addToWatchList(this.props.movies.id);
   };
 
-  removeFromWatchList = (id) => {
+  watchListRemove = (id) => {
     console.log("This movie has been removed from the Watchlist");
-    this.props.REMOVE_FROM_WATCHLIST(this.props.movies.id);
+    this.props.removeFromWatchList(this.props.movies.id);
   };
 
   render() {
@@ -69,8 +71,11 @@ class MovieCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button onClick={this.addToWatchlist} size="small" color="primary">
+          <Button onClick={this.watchListAdd} size="small" color="primary">
             Add to WatchList
+          </Button>
+          <Button onClick={this.watchListRemove} size="small" color="primary">
+            Remove from WatchList
           </Button>
           <Button
             component={Link}
@@ -97,6 +102,8 @@ class MovieCard extends Component {
 MovieCard.propTypes = {
   data: PropTypes.object.isRequired,
   getSingleMovie: PropTypes.object.isRequired,
+  addToWatchList: PropTypes.object,
+  removeFromWatchList: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -108,6 +115,8 @@ const mapStateToProps = (state) => ({
 // {getMovies, nextAPICAll, nextAPICall, etc.}
 export default connect(mapStateToProps, {
   getSingleMovieDetail,
+  addToWatchList,
+  removeFromWatchList,
 })(MovieCard);
 
 //export default withStyles((styles)(ImgMediaCard))

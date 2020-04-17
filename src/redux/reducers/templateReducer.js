@@ -79,10 +79,10 @@ let templateReducer = (state, action) => {
     case ADD_TO_WATCHLIST:
       return {
         ...state,
-        watchList: state.watchList.concat(action.data),
+        watchList: state.watchlist.concat(action.data),
       };
     case REMOVE_FROM_WATCHLIST:
-      let newArray = state.watchList.filter((item) => {
+      let newArray = state.watchlist.filter((item) => {
         return item.id !== action.id;
       });
       return {

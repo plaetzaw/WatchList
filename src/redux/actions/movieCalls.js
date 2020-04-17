@@ -10,7 +10,22 @@ import {
   BUILD_MOVIE_CREDITS,
   BUILD_SIMILAR_MOVIES,
   BUILD_MOVIE_DETAILS,
+  ADD_TO_WATCHLIST,
+  REMOVE_FROM_WATCHLIST,
 } from "./actionTypes";
+
+//Add to WatchList
+export const addToWatchList = (id) => (dispatch) => {
+  dispatch({ type: ADD_TO_WATCHLIST, payload: id });
+  console.log("Dispatching Watchlist Add Toggle");
+  console.log(id);
+};
+
+//Remove from WatchList
+export const removeFromWatchList = (id) => (dispatch) => {
+  dispatch({ type: REMOVE_FROM_WATCHLIST, payload: id });
+  console.log("Dispatching Watchlist Remove Toggle");
+};
 
 //Now Playing
 export const getMovies = () => (dispatch) => {
@@ -51,20 +66,6 @@ export const getUpcomingMovies = () => (dispatch) => {
       console.log(movies.data.results);
     });
 };
-
-//Get movie info by ID
-//NOT BEING USED BECAUSE REASONS
-// export const getSpecificMovie = () => (dispatch) => {
-//   dispatch({ type: LOADING_DATA });
-//   axios
-//     .get(
-//       `https://api.themoviedb.org/3/movie/${this.props.movies.title}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
-//     )
-//     .then((thisMovie) => {
-//       dispatch({ type: GO_TO_MOVIE, payload: thisMovie.data });
-//       console.log(thisMovie);
-//     });
-// };
 
 //Movie Genres
 export const filterByGenre = () => (dispatch) => {
@@ -148,7 +149,6 @@ export const getSingleMovieDetail = (movieId) => (dispatch) => {
               dispatch({
                 type: BUILD_MOVIE_CREDITS,
                 payload: res.data,
-                // payload: res.data,
               });
               return;
             })

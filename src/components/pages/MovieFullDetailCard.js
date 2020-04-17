@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 // MUI STUFF
 // import withStyles from "@material-ui/core/styles/withStyles";
@@ -21,7 +20,6 @@ class MovieFullDetail extends Component {
   render() {
     console.log("Rendering Full Page Movie");
     console.log(this.props.movies.id);
-    console.log(this);
     return (
       <Card>
         <CardActionArea>
@@ -40,7 +38,8 @@ class MovieFullDetail extends Component {
               <br />
               Release Date: {this.props.movies.release_date}
               <br />
-              Cast: {this.props.singleMovie.id}
+              <br />
+              {/* Cast: {this.props.credits} */}
             </Typography>
           </CardContent>
         </CardActionArea>
