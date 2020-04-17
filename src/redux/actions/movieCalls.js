@@ -148,6 +148,7 @@ export const getSingleMovieDetail = (movieId) => (dispatch) => {
               dispatch({
                 type: BUILD_MOVIE_CREDITS,
                 payload: res.data,
+                // payload: res.data,
               });
               return;
             })

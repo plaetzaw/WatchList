@@ -111,20 +111,23 @@ let templateReducer = (state, action) => {
       return {
         ...state,
         specificMovie: {
+          ...state.specificMovie,
           details: action.payload,
         },
       };
     case BUILD_SIMILAR_MOVIES:
       return {
+        ...state,
         specificMovie: {
-          ...state,
+          ...state.specificMovie,
           similar: action.payload,
         },
       };
     case BUILD_MOVIE_CREDITS:
       return {
+        ...state,
         specificMovie: {
-          ...state,
+          ...state.specificMovie,
           credits: action.payload,
         },
       };
