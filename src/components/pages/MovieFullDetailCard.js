@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 // MUI STUFF
 // import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -10,25 +9,27 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 // import { getSingleMovie } from "../redux/actions/movieCalls";
-
 // REDUX STUFF
 import { connect } from "react-redux";
-
 class MovieFullDetail extends Component {
   render() {
     console.log("==========SINGLE MOVIE STUFF===========");
-    console.log(this.props.data);
+    // console.log("single movie prop data: ", this.props.data);
     let cast = this.props.data.specificMovie.credits.cast;
     console.log("cast", this.props.data.specificMovie.credits.cast);
     console.log(cast);
     //Mapping why don't you work!
-    try {
-      cast.map((data) => <MovieFullDetail movies={data} />);
-    } catch {
-      console.log("not data for cast found");
-    }
+    //can't render itself (naming problem recursive)
+    //let castList = cast.map((data) => <MovieFullDetail movies={data} />);
+    let castList = cast.map((creditInfo) => {
+      return (
+        <li>
+          {creditInfo.name} as {creditInfo.character}
+        </li>
+      );
+    });
+    console.log("castList:   ", castList);
     return (
       <Card>
         <CardActionArea>
@@ -45,7 +46,6 @@ class MovieFullDetail extends Component {
               <br />
               <br />"{this.props.data.specificMovie.details.tagline}
             </Typography>
-
             <Typography variant="body1" color="textSecondary" component="p">
               <br />
               {this.props.data.specificMovie.details.overview}
@@ -57,6 +57,8 @@ class MovieFullDetail extends Component {
               Cast: {this.props.data.specificMovie.credits.id} ID
               <br />
               Runtime: {this.props.data.specificMovie.details.runtime} minutes
+              <br />
+              Cast: {castList}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -65,16 +67,12 @@ class MovieFullDetail extends Component {
     );
   }
 }
-
 // REDUX JUNK BELOW
-
 MovieFullDetail.propTypes = {
   data: PropTypes.object.isRequired,
   getSingleMovie: PropTypes.func.isRequired,
 };
-
 const mapStateToProps = (state) => ({
   data: state.data,
 });
-
 export default connect(mapStateToProps)(MovieFullDetail);

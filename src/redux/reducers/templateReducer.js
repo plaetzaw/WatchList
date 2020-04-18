@@ -23,9 +23,9 @@ let templateReducer = (state, action) => {
       loading: false,
       movies: [],
       specificMovie: {
-        credits: {},
-        details: {},
-        similar: {},
+        credits: [],
+        details: [],
+        similar: [],
       },
       watchlist: [],
       genrelist: [],

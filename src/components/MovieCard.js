@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
 // MUI STUFF
 // import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -12,14 +11,12 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 // import Grid from "@material-ui/core/Grid";
-
 import { getSingleMovieDetail } from "../redux/actions/movieCalls";
 import { addToWatchList } from "../redux/actions/movieCalls";
 import { removeFromWatchList } from "../redux/actions/movieCalls";
-
+import { withRouter } from "react-router-dom";
 // REDUX STUFF
 import { connect } from "react-redux";
-
 /* const styles = (theme) => ({
   ...theme.spreadThis,
   newThing: {
@@ -27,26 +24,26 @@ import { connect } from "react-redux";
     fontSize: "1000px"
   }
 }) */
-
 class MovieCard extends Component {
-  handleOneMovie = () => {
-    console.log("View Full Info Button has been clicked");
-    this.props.getSingleMovieDetail(this.props.movies.id);
+  constructor(props) {
+    super(props);
+  }
+  handleOneMovie = async () => {
+    await this.props.getSingleMovieDetail(this.props.movies.id);
+    console.log("Vero: button clicked. off to get data");
+    console.log("Vero: View Full Info Button has been clicked");
+    this.props.history.push("/movieinfo");
   };
-
   watchListAdd = () => {
     console.log("This movie has been added to the Watchlist");
     this.props.addToWatchList(this.props.movies.id);
   };
-
   watchListRemove = (id) => {
     console.log("This movie has been removed from the Watchlist");
     this.props.removeFromWatchList(this.props.movies.id);
   };
-
   render() {
     console.log("Start Render");
-
     return (
       <Card>
         <CardActionArea>
@@ -80,7 +77,7 @@ class MovieCard extends Component {
           <Button
             component={Link}
             // {to={`${this.props.movies.id}`}}
-            to="/movieinfo"
+            //to="/movieinfo"
             name={this.props.movies.id}
             size="small"
             color="primary"
@@ -97,27 +94,23 @@ class MovieCard extends Component {
     );
   }
 }
-
 // REDUX JUNK BELOW
-
 MovieCard.propTypes = {
   data: PropTypes.object.isRequired,
   getSingleMovie: PropTypes.object.isRequired,
   addToWatchList: PropTypes.object,
   removeFromWatchList: PropTypes.object,
 };
-
 const mapStateToProps = (state) => ({
   data: state.data,
 });
-
 //export default ImgMediaCard;
-
 // {getMovies, nextAPICAll, nextAPICall, etc.}
-export default connect(mapStateToProps, {
-  getSingleMovieDetail,
-  addToWatchList,
-  removeFromWatchList,
-})(MovieCard);
-
+export default withRouter(
+  connect(mapStateToProps, {
+    getSingleMovieDetail,
+    addToWatchList,
+    removeFromWatchList,
+  })(MovieCard)
+);
 //export default withStyles((styles)(ImgMediaCard))

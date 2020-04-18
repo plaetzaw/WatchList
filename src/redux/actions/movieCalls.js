@@ -79,17 +79,13 @@ export const filterByGenre = () => (dispatch) => {
     });
 };
 
-export const getSingleMovieDetail = (movieId) => (dispatch) => {
+export const getSingleMovieDetail = (movieId) => async (dispatch) => {
   console.log("LOOKING FOR SINGLE MOVIE DETAILS...");
-
-  axios
+  await axios
     .get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
     )
     .then((res) => {
-      console.log("FOUND THE MOVIE DETAILS...UPDATING STATE...");
-      console.log(res);
-
       dispatch({
         type: SET_SINGLE_MOVIE,
         payload: res.data,
@@ -98,62 +94,45 @@ export const getSingleMovieDetail = (movieId) => (dispatch) => {
         type: BUILD_MOVIE_DETAILS,
         payload: res.data,
       });
-
-      console.log("LOOKING FOR THE SIMILAR MOVIE DETAILS...");
-
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
-        )
-        .then((res) => {
-          console.log("FOUND THE SIMILAR MOVIES...UPDATING STATE...");
-          res.data = JSON.parse(JSON.stringify(res.data));
-          let similar = [];
-          console.log(res.data.results);
-
-          let missing = "No Movies Found";
-
-          if (!res.data.results) {
-            console.log("NOTHING FOUND :'(");
-            dispatch({
-              type: BUILD_SIMILAR_MOVIES,
-              payload: missing,
-            });
-          } else if (res.data.results) {
-            console.log("Found Similar Movie ");
-            let info = res.data.results;
-            info.forEach((item) => {
-              similar.push(item);
-            });
-          }
-          // [...res].forEach((item) => {
-
-          dispatch({
-            type: BUILD_SIMILAR_MOVIES,
-            payload: similar,
-          });
-
-          console.log(res);
-          console.log(res.data);
-          console.log("LOOKING FOR SINGLE MOVIE CREDITS...");
-
-          axios
-            .get(
-              `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
-            )
-
-            .then((res) => {
-              console.log("FOUND THE MOVIE CREDITS...UPDATING STATE...");
-              console.log(res);
-              dispatch({
-                type: BUILD_MOVIE_CREDITS,
-                payload: res.data,
-              });
-              return;
-            })
-            .catch((err) => console.error(err));
-        })
-        .catch((err) => console.error(err));
-    })
-    .catch((err) => console.error(err));
+    });
+  console.log("LOOKING FOR THE SIMILAR MOVIE DETAILS...");
+  await axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+    )
+    .then((res) => {
+      console.log("FOUND THE SIMILAR MOVIES...UPDATING STATE...");
+      res.data = JSON.parse(JSON.stringify(res.data));
+      let similar = [];
+      console.log(res.data.results);
+      let missing = "No Movies Found";
+      if (!res.data.results) {
+        console.log("NOTHING FOUND :'(");
+        dispatch({
+          type: BUILD_SIMILAR_MOVIES,
+          payload: missing,
+        });
+      } else if (res.data.results) {
+        console.log("Found Similar Movie ");
+        let info = res.data.results;
+        info.forEach((item) => {
+          similar.push(item);
+        });
+      }
+    });
+  console.log("vero: dispatch called");
+  // console.log(res);
+  // console.log(res.data);
+  console.log("LOOKING FOR SINGLE MOVIE CREDITS...");
+  await axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+    )
+    .then((res) => {
+      console.log("vero: credit response");
+      dispatch({
+        type: BUILD_MOVIE_CREDITS,
+        payload: res.data,
+      });
+    });
 };
