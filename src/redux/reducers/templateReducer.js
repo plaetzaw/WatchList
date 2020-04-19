@@ -79,7 +79,7 @@ let templateReducer = (state, action) => {
     case ADD_TO_WATCHLIST:
       return {
         ...state,
-        watchList: state.watchlist.concat(action.payload),
+        watchlist: state.watchlist.concat(action.payload),
       };
     case REMOVE_FROM_WATCHLIST:
       let newArray = state.watchlist.filter((item) => {
@@ -87,7 +87,7 @@ let templateReducer = (state, action) => {
       });
       return {
         ...state,
-        watchList: newArray,
+        watchlist: newArray,
       };
     case GO_TO_MOVIE:
       return {

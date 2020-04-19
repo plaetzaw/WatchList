@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Placeholder from "./placeholder.png";
 import { Carousel } from "react-responsive-carousel";
 
 // import { getSingleMovie } from "../redux/actions/movieCalls";
@@ -42,7 +43,7 @@ class MovieFullDetail extends Component {
               width="300px"
             />
             <Typography variant="body1" color="textSecondary">
-              {creditInfo.name} as {creditInfo.character}
+              <b>{creditInfo.name}</b> as <i>{creditInfo.character}</i>
             </Typography>
             {/* </li> */}
           </CardActionArea>
@@ -50,6 +51,26 @@ class MovieFullDetail extends Component {
       );
     });
     console.log("castList:   ", castList);
+
+    let similar = this.props.data.specificMovie.similar;
+    console.log("similar", this.props.data.specificMovie.similar);
+    console.log(similar);
+    let similarList = similar.map((similarInfo) => {
+      return (
+        <Card>
+          <CardActionArea>
+            <img
+              src={`https://image.tmdb.org/t/p/original/${similarInfo.backdrop_path}`}
+              width="300px"
+            />
+            <Typography variant="body1" color="textSecondary">
+              <h1>{similarInfo.title}</h1>
+            </Typography>
+          </CardActionArea>
+        </Card>
+      );
+    });
+
     return (
       <Card>
         <CardActionArea>
@@ -79,11 +100,20 @@ class MovieFullDetail extends Component {
               <br />
               Runtime: {this.props.data.specificMovie.details.runtime} minutes
               <br />
-              Cast:
+              <h1>Cast:</h1>
               <Grid container spacing={3}>
                 <Grid item xs={12}></Grid>
                 {castList}
               </Grid>
+              <br />
+              <br />
+              <h2>Similar Movies:</h2>
+              <Carousel>
+                {/* <Grid container spacing={6}>
+                  <Grid item xs={6}></Grid> */}
+                {similarList}
+                {/* </Grid> */}
+              </Carousel>
             </Typography>
           </CardContent>
         </CardActionArea>
