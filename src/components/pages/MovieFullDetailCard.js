@@ -7,6 +7,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -27,13 +28,25 @@ class MovieFullDetail extends Component {
     //let castList = cast.map((data) => <MovieFullDetail movies={data} />);
     let castList = cast.map((creditInfo) => {
       return (
-        <li>
-          <img
-            src={`https://image.tmdb.org/t/p/original/${creditInfo.profile_path}`}
-          />
-          {creditInfo.name} as {creditInfo.character}
-          ID: {creditInfo.credit_id}
-        </li>
+        <Card>
+          <CardActionArea>
+            {/* <CardMedia
+              component="img"
+              src={`https://image.tmdb.org/t/p/original/${creditInfo.profile_path}`}
+              width="300px"
+            /> */}
+
+            {/* <li> */}
+            <img
+              src={`https://image.tmdb.org/t/p/original/${creditInfo.profile_path}`}
+              width="300px"
+            />
+            <Typography variant="body1" color="textSecondary">
+              {creditInfo.name} as {creditInfo.character}
+            </Typography>
+            {/* </li> */}
+          </CardActionArea>
+        </Card>
       );
     });
     console.log("castList:   ", castList);
@@ -66,12 +79,14 @@ class MovieFullDetail extends Component {
               <br />
               Runtime: {this.props.data.specificMovie.details.runtime} minutes
               <br />
-              Cast: {castList}
-              <Carousel></Carousel>
+              Cast:
+              <Grid container spacing={3}>
+                <Grid item xs={12}></Grid>
+                {castList}
+              </Grid>
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions></CardActions>
       </Card>
     );
   }
