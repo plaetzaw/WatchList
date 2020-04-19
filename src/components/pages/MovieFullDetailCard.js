@@ -9,6 +9,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+
 // import { getSingleMovie } from "../redux/actions/movieCalls";
 // REDUX STUFF
 import { connect } from "react-redux";
@@ -19,13 +22,17 @@ class MovieFullDetail extends Component {
     let cast = this.props.data.specificMovie.credits.cast;
     console.log("cast", this.props.data.specificMovie.credits.cast);
     console.log(cast);
-    //Mapping why don't you work!
+    //Mapping why don't y ou work!
     //can't render itself (naming problem recursive)
     //let castList = cast.map((data) => <MovieFullDetail movies={data} />);
     let castList = cast.map((creditInfo) => {
       return (
         <li>
+          <img
+            src={`https://image.tmdb.org/t/p/original/${creditInfo.profile_path}`}
+          />
           {creditInfo.name} as {creditInfo.character}
+          ID: {creditInfo.credit_id}
         </li>
       );
     });
@@ -44,7 +51,8 @@ class MovieFullDetail extends Component {
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.data.specificMovie.details.title}
               <br />
-              <br />"{this.props.data.specificMovie.details.tagline}
+              <br />
+              {this.props.data.specificMovie.details.tagline}
             </Typography>
             <Typography variant="body1" color="textSecondary" component="p">
               <br />
@@ -54,11 +62,12 @@ class MovieFullDetail extends Component {
               <br />
               Budget: ${this.props.data.specificMovie.details.budget}USD
               <br />
-              Cast: {this.props.data.specificMovie.credits.id} ID
+              IDs: {this.props.data.specificMovie.credits.id}
               <br />
               Runtime: {this.props.data.specificMovie.details.runtime} minutes
               <br />
               Cast: {castList}
+              <Carousel></Carousel>
             </Typography>
           </CardContent>
         </CardActionArea>

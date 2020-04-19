@@ -118,11 +118,13 @@ export const getSingleMovieDetail = (movieId) => async (dispatch) => {
         info.forEach((item) => {
           similar.push(item);
         });
+        dispatch({
+          type: BUILD_SIMILAR_MOVIES,
+          payload: similar,
+        });
       }
     });
   console.log("vero: dispatch called");
-  // console.log(res);
-  // console.log(res.data);
   console.log("LOOKING FOR SINGLE MOVIE CREDITS...");
   await axios
     .get(
