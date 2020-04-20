@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiKey } from "../../components/apiKey";
 import {
   LOADING_DATA,
   SET_HOT_MOVIES,
@@ -31,7 +32,7 @@ export const getMovies = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/now_playing?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
     )
     .then((movies) => {
       dispatch({ type: SET_HOT_MOVIES, payload: movies.data.results });
@@ -45,7 +46,7 @@ export const getPopularMovies = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
     )
     .then((movies) => {
       dispatch({ type: SET_POPULAR_MOVIES, payload: movies.data.results });
@@ -58,7 +59,7 @@ export const getUpcomingMovies = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US&page=2"
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=2`
     )
     .then((movies) => {
       dispatch({ type: SET_UPCOMING_MOVIES, payload: movies.data.results });
@@ -71,7 +72,7 @@ export const filterByGenre = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US"
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
     )
     .then((sortMovies) => {
       dispatch({ type: FILTER_BY_GENRE, payload: sortMovies.data });
@@ -83,7 +84,7 @@ export const getSingleMovieDetail = (movieId) => async (dispatch) => {
   console.log("LOOKING FOR SINGLE MOVIE DETAILS...");
   await axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
     )
     .then((res) => {
       dispatch({
@@ -98,7 +99,7 @@ export const getSingleMovieDetail = (movieId) => async (dispatch) => {
   console.log("LOOKING FOR THE SIMILAR MOVIE DETAILS...");
   await axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US`
     )
     .then((res) => {
       console.log("FOUND THE SIMILAR MOVIES...UPDATING STATE...");
@@ -128,7 +129,7 @@ export const getSingleMovieDetail = (movieId) => async (dispatch) => {
   console.log("LOOKING FOR SINGLE MOVIE CREDITS...");
   await axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=9c4a5ca1df6fbe981b6a3481d0b13dee&language=en-US`
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`
     )
     .then((res) => {
       console.log("vero: credit response");
