@@ -8,15 +8,17 @@ import PropTypes from "prop-types";
 import MovieCard from "../MovieCard";
 
 // REDUX
-import { getSingleMovieDetail } from "../../redux/actions/movieCalls";
+import { getMovies } from "../../redux/actions/movieCalls";
 import { connect } from "react-redux";
 
 class Watchlist extends Component {
   componentWillMount() {
-    this.props.getSingleMovieDetail();
+    this.props.getMovies();
   }
 
   render() {
+    console.log("Attempting to render watchlist");
+
     const { movies, loading, watchlist } = this.props.data;
 
     let movieMarkup = !loading ? (
@@ -25,8 +27,7 @@ class Watchlist extends Component {
       <p>Loading...</p>
     );
 
-    console.log("NOW PLAYING PAGE");
-    console.log(this);
+    console.log("Watchlist has been rendered");
 
     return <>{movieMarkup}</>;
   }
@@ -34,9 +35,7 @@ class Watchlist extends Component {
 
 Watchlist.propTypes = {
   //ADD PROP TYPES HERE JUST REPEAT FuncName: PropTypes.func.isRequired
-  getSingleMovieDetail: PropTypes.func.isRequired,
-  //getSpecificMovie: PropTypes.func.isRequired,
-  //filterByGenre: PropTypes.func.isRequired,
+  getMovies: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -44,4 +43,4 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getSingleMovieDetail })(Watchlist);
+export default connect(mapStateToProps, { getMovies })(Watchlist);

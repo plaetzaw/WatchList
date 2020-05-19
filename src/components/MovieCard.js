@@ -63,7 +63,7 @@ class MovieCard extends Component {
               <br />
               Release Date: {this.props.movies.release_date}
               <br />
-              Genres: {this.props.movies.genre_ids}
+              {/* Genres: {this.props.movies.genre_ids} */}
             </Typography>
           </CardContent>
         </CardActionArea>

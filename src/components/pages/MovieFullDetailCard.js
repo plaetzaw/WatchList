@@ -14,8 +14,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Placeholder from "./placeholder.png";
 import { Carousel } from "react-responsive-carousel";
 
-// import { getSingleMovie } from "../redux/actions/movieCalls";
-// REDUX STUFF
 import { connect } from "react-redux";
 class MovieFullDetail extends Component {
   render() {

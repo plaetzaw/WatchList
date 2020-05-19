@@ -68,10 +68,9 @@ ReactDOM.render(
       <BrowserRouter>
         <BaseLayout>
           <Switch>
-            <Route exact path="/" component={App} />
             <Route exact path="/watchlist" component={Container} />
             <Route exact path="/aboutus" component={Container} />
-            <Route exact path="/nowplaying" component={Movie} />
+            <Route exact path="/" component={Movie} />
             <Route exact path="/popular" component={Popular} />
             <Route exact path="/upcoming" component={Upcoming} />
             <Route exact path="/movieinfo" component={MovieFullDetail} />
